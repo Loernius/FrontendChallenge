@@ -1,0 +1,118 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Signed Teams</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <table class="table table-striped" style="margin-top: 25px">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Players</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let team of teamList; let i = index;">
+                <td>
+                    {{ team.name }}
+                </td>
+                <td>
+                  <div class="d-inline-block">
+                    <ng-template #participantListPopover>
+                      <div *ngFor="let participant of team.participants;">
+                        <p>{{participant.nick}}</p>
+                      </div>
+                    </ng-template>
+                    <button type="button" class="btn btn-outline-secondary" [ngbPopover]="participantListPopover" triggers="mouseenter:mouseleave">
+                      <fa-icon [icon]='faList'></fa-icon>
+                    </button>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-inline-block">
+                    <button class="btn btn-outline-primary" id="deleteTeamsOption" (click)='deleteTeam(i)'><fa-icon [icon]='faTrash'></fa-icon></button>
+                  </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+</ng-template>
+
+<div class="container">
+	<h3>Welcome to Summoners Rift</h3>
+	<h5>Its time to end this war once for all!</h5>
+	<h5>Sign bellow the teams for the tournament that will declare the DEFINITIVE champion of Runeterra</h5>
+	<h5>A team must have exactly <strong>5</strong> players and <strong>1</strong> coach, totalizing six participants</h5>
+	<div class='row mt-3'>
+		<div class="col-md-4">
+			<label for="teamName">Team's name</label>
+			<input type="text" class="form-control" id="teamName" name="teamName" [(ngModel)]="newTeam.name">
+    </div>
+  </div>
+  <div class='row mt-3'>
+    <div class="col-md-4">
+      <label for="nick">Player's nick</label>
+      <input type="text" class="form-control" id="nick" name='nick' [(ngModel)]='newParticipant.nick'>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="rankingSelect">Player's rank</label>
+        <select class="form-control" id="rankingSelect" name='rankingSelect' [(ngModel)]='newParticipant.rank'>
+          <option value='0'>Iron</option>
+          <option value='1'>Bronze</option>
+          <option value='2'>Silver</option>
+          <option value='3'>Gold</option>
+          <option value='4'>Platinum</option>
+          <option value='5'>Diamond</option>
+          <option value='6'>Master</option>
+          <option value='7'>Grand-Master</option>
+          <option value='8'>Challenger</option>
+        </select>
+      </div>
+    </div>
+    <div class='col-md-4'>
+      <button type="button" class="btn btn-primary" style='margin-top: 32px' (click)='addParticipantToTeam()'>+</button>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col-md-4'>
+      <button type="button" class="btn btn-primary" style='margin-top: 32px' (click)='addTeam()'>Sign team</button>
+    </div>
+    <div class='col-md-4'>
+      <button type="button" class="btn btn-warning" style='margin-top: 32px' (click)='openTeamsModal(content)'>Team list</button>
+    </div>
+    <div class='col-md-4'>
+      <button type="button" class="btn btn-success" style='margin-top: 32px' (click)='goToTournament()'>Start tournament</button>
+    </div>
+  </div>
+  <div class='row'>
+    <table class="table table-striped" style="margin-top: 25px">
+    <thead>
+    <tr>
+      <th scope="col">Nick</th>
+      <th scope="col">Ranking</th>
+      <th scope="col">#</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let participant of participantList; let i = index">
+      <td>
+        {{ participant.nick }}
+      </td>
+      <td>
+        {{parseRankingName(participant.rank)}}
+      </td>
+      <td>
+        <button class="btn btn-outline-warning" id="deleteTeamsOption" (click)='deleteParticipant(i)'><fa-icon [icon]='faTrash'></fa-icon></button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  </div>
+
+</div>
+

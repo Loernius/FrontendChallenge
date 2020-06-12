@@ -1,0 +1,42 @@
+<div class='tournament-container'>
+  <div class='round'>
+      <ng-container *ngFor="let match of rounds[0]; let matchindex = index;">
+        <div class="input-group team">
+          <input type="text" class="form-control" readonly [value]='match.team.name'>
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" [disabled]='checkRound1Ended(matchindex)' type="button" (click)="selectWinner(0, matchindex, 0)"> <fa-icon [icon]='faArrow'></fa-icon> </button>
+          </div>
+        </div>
+        <div class="input-group opponent">
+          <input type="text" class="form-control" readonly [value]='match.opponent.name'>
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" [disabled]='checkRound1Ended(matchindex)' type="button" (click)="selectWinner(0, matchindex, 1)"> <fa-icon [icon]='faArrow'></fa-icon> </button>
+          </div>
+        </div>
+      </ng-container>
+  </div>
+  <div class='round'>
+      <ng-container *ngFor="let match of rounds[1]; let matchindex = index;">
+        <div class="input-group team">
+          <input type="text" class="form-control" readonly [value]='match.team ? match.team.name : ""'>
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" [disabled]='checkFinalRoundEnded() || !checkFinalRoundStarted()' type="button" (click)="selectWinner(1, matchindex, 0)"> <fa-icon [icon]='faArrow'></fa-icon> </button>
+          </div>
+        </div>
+        <div class="input-group opponent">
+          <input type="text" class="form-control" readonly [value]='match.opponent ? match.opponent.name : ""'>
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" [disabled]='checkFinalRoundEnded() || !checkFinalRoundStarted()' type="button" (click)="selectWinner(1, matchindex, 1)"> <fa-icon [icon]='faArrow'></fa-icon> </button>
+          </div>
+        </div>
+      </ng-container>
+  </div>
+  <div class='round'>
+    <ng-container *ngFor="let match of rounds[1]">
+      <div class="input-group winner">
+        <input type="text" class="form-control" readonly [value]='match.winner ? match.winner.name : ""'>
+      </div>
+    </ng-container>
+  </div>
+
+</div>

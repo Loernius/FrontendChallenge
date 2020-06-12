@@ -1,0 +1,59 @@
+
+@import "../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../node_modules/bootstrap/scss/variables";
+
+$theme-colors: (
+  secondary: #563d7c
+);
+
+@import "../../../../node_modules/bootstrap/scss/bootstrap.scss";
+.tournament-container {
+  display: flex;
+  flex-direction: row;
+}
+
+p {
+  margin: 0 auto !important;
+}
+
+.round > .input-group {
+  width: 200px !important;
+}
+
+.round {
+  margin-right: 75px;
+}
+
+.team {
+  display: flex;
+  flex-direction: row;
+  margin-top: 100px;
+  align-items: center;
+  background-color: #EBEBEB;
+}
+
+.opponent{
+  display: flex;
+  flex-direction: row;
+  margin-top: 50px;
+  align-items: center;
+  background-color: #EBEBEB;
+}
+
+.winner {
+  display: flex;
+  flex-direction: row;
+  margin-top: 256px;
+  align-items: center;
+  background-color: #EBEBEB;
+}
+
+.round:nth-child(2) > .team {
+  margin: unset;
+  margin-top: 144px;
+}
+
+.round:nth-child(2) > .opponent {
+  margin: unset;
+  margin-top: 188px;
+}
